@@ -1,61 +1,23 @@
 import React, { useState } from 'react'
+import { Inputs, List } from './components'
 
 export const RealizarChance = () => {
 
-  const [numero, setNumero] = useState("")
-  const [costo, setCosto] = useState("")
   const [apuestas, setApuestas] = useState([])
-
-  const manejarNumero = (Numero) => {
-    setNumero(Numero.target.value)
-  }
-
-  const manejarCosto = (Costo) => {
-    setCosto(Costo.target.value)
-  }
-
-  const[value, setValue] = useState(name)
-
-  const AddApuestas = () => {
-    setApuestas([...apuestas, {numero: numero, costo: costo}])
-    setNumero("")
-    setCosto("")
-  }
-
-  
-
+  const [total, setTotal] = useState(0)
 
   return (
-    <>
-      <h1>Gane Inc.</h1>
-      <div>
-        <div>
-          <label htmlFor="numberC">Numero: </label>
-          <input value={numero} onChange={(e) => manejarNumero(e)} type="text" name="numberC" id="numberC" />
-        </div>
+    <div className='flex flex-col items-center justify-center bg-blue-900 w-screen h-screen'>
+      <h1 className='text-yellow-500 text-8xl p-5 font-bold lasombraxd'>Gane Inc.</h1>
 
-        <div>
-          <label htmlFor="costC">Valor: </label>
-          <input value={costo} onChange={(e) => manejarCosto(e)} type="text" name="costC" id="costC" />
-        </div>
+      <Inputs apuestas={apuestas} setApuestas={setApuestas} total={total} setTotal={setTotal}></Inputs>
 
-        <div>
-          <button onClick={() => AddApuestas()} type="submit">Agregar</button>
-        </div>
+      <h3 className='text-white text-lg font-semibold p-3'>El Total es: {total} </h3>
+
+      <div className='text-white text-lg font-semibold p-2'>
+          <List apuestas={apuestas}></List>
       </div>
-      
-      <h3>EL Total es: </h3>
 
-      <h3>
-        <ol>
-          {
-            apuestas.map( (element, key)  => {
-              return <li key={key}>{element.numero}  : $ {element.costo}</li>;
-            })
-          }
-        </ol>
-      </h3>
-
-    </>
+    </div>
   )
 }
